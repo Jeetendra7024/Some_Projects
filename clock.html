@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>clock</title>
+     <style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+    color: white;
+    font-family: 'monospace', monospace;
+    font-size: 5rem;
+     margin: 0;
+     transition: background-attachment: fixed 0.5s;
+}
+#clock {
+    padding: 20px 40px;
+    text-align: center;
+    border: 3px solid white;
+    color:#fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+</style>
+</head>
+<body>
+     <div id="clock"></div>
+     <script>
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent=`${h}:${m}:${s}`;
+  document.body.style.background = now.getHours()>=6 && now.getHours()<18 ? '#2b9df4' : '#0a0f2a';
+}
+setInterval(updateClock,1000);
+updateClock();
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI</title>
+
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        padding: auto;
+        font-family: Arial;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-family: monospace;
+        background: #fff;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin: 40px;
+        border: 1.5px solid #0b0b0b;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+
+<div class="box">
+      <input id="w" placeholder="Weight (kg)" type="number" />
+      <br />
+      <input id="h" placeholder="Height (cm)" type="number" />
+      <br />
+      <button onclick="calc()">Calculate</button>
+      <p id="res"></p>
+</div>
+    
+    <script>
+      function calc() {
+        const w = +document.getElementById("w").value;
+        const h = +document.getElementById("h").value / 100;
+        if (!w || !h) {
+          document.getElementById("res").textContent = "Enter valid values";
+          return;
+        }
+        const bmi = (w / (h * h)).toFixed(1);
+        let cat = "";
+        if (bmi < 18.5) cat = "Underweight";
+        else if (bmi < 25) cat = "Normal";
+        else if (bmi < 30) cat = "Overweight";
+        else cat = "Obese";
+        document.getElementById("res").textContent = `BMI: ${bmi} (${cat})`;
+      }
+    </script>
+  </body>
+</html>

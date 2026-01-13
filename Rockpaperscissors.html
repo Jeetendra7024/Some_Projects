@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="\CSS\Rockpaperscissors.css" />
+  </head>
+  <body>
+    <h1>Rock Paper Scissors</h1>
+    <p>Choose your move:</p>
+    <div class="choices">
+      <div class="choice" id="Rock"><img src="rock.png.jpeg"></div>
+      <div class="choice" id="Paper"><img src="paper.png.png"></div>
+      <div class="choice" id="Scissors"><img src="scissors.png.png"></div>
+    </div>
+    <div class="score-board">
+    <div class="score">
+      <p id="user-score">0</p>
+      <p>you</p>
+    </div>
+    <div class="score">
+      <p id="computer-score">0</p>
+      <p>computer</p>
+    </div>
+    </div>
+    <div class="result-box">
+      <p id="result-message">Make your move!</p>
+    </div>
+ <script>
+let userScore = 0;
+let computerScore = 0;
+
+const userScore_span = document.querySelectorAll("#user-score");
+const computerScore_span = document.querySelectorAll("#computer-score");
+const choices = document.querySelectorAll(".choice");
+const result_p = document.querySelectorAll("#result-message");
+
+const getComputerChoice = () => {
+  const choiceArray = ["rock", "paper", "scissors"];
+  const randomIndex = Math.floor(Math.random() * 3);
+  return choiceArray[randomIndex];
+};
+
+const drawgame = () => {
+  result_p.innertext = "It's a Draw! 🤝";
+  result_p.style.color = "gray";
+};
+
+const winner = (userwin, userChoice, computerChoice) => {
+  if (userwin) {
+    userScore++;
+    userScore_span.innertext = userScore;
+    result_p.innertext = `${userChoice} beats ${computerChoice}. You Win! 🎉`;
+    result_p.style.color = "green";
+  } else {
+    computerScore++;
+    computerScore_span.innertext = computerScore;
+    result_p.innertext = `${computerChoice} beats ${userChoice}. You Lose! 😞`;
+    result_p.style.color = "red";
+
+
+const playgame = (userChoice) => {
+  // generate computer choice
+  const computerChoice = getComputerChoice();
+
+  // determine winner
+  if (userChoice === computerChoice) {
+    drawgame(); // it's a draw
+  } else {
+    let userWin = true;
+    if (userChoice === "rock") {
+      // rock beats scissors , paper
+      userWin = computerChoice === "paper" ? false : true;
+    } else if (userChoice === "paper") {
+      // paper beats rock , scissors
+      userWin = computerChoice === "scissors" ? false : true;
+    } else if (userChoice === "scissors") {
+      // scissors beats paper , rock
+      userWin = computerChoice === "rock" ? false : true;
+    }
+     winner(userWin, userChoice, computerChoice);
+    }
+  };
+};
+  choices.forEach((choice) =>
+    choice.addEventListener("click", () => {
+      const userChoice = choice.getAttribute("id");
+      playgame(userChoice);
+    })
+     );
+};
+     
+    </script>
+  </body>
+</html>
+
